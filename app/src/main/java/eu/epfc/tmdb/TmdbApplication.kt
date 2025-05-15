@@ -5,7 +5,7 @@ import android.content.Context
 import eu.epfc.tmdb.data.AppContainer
 import eu.epfc.tmdb.data.DefaultAppContainer
 import eu.epfc.tmdb.data.services.AuthManager
-import eu.epfc.tmdb.data.services.FavoritesManager
+//import eu.epfc.tmdb.data.services.FavoritesManager
 import eu.epfc.tmdb.network.TmdbService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

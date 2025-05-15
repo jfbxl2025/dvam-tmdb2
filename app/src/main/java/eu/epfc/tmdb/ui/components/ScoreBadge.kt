@@ -2,6 +2,8 @@ package eu.epfc.tmdb.ui.components
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +16,7 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 
@@ -24,6 +27,10 @@ fun ScoreBadge(
 ) {
 
     val textMeasurer = rememberTextMeasurer()
+
+
+    Spacer( modifier = Modifier.size(30.dp),
+        )
     Text(
         text = score.toString(),
         modifier = Modifier

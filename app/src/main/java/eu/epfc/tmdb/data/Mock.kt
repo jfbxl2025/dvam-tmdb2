@@ -1,7 +1,7 @@
 package eu.epfc.tmdb.data
 
 import eu.epfc.tmdb.data.model.Details
-import eu.epfc.tmdb.data.model.Genre
+import eu.epfc.tmdb.data.model.Details.Genre
 import eu.epfc.tmdb.data.model.Movie
 
 data object Mock {
@@ -22,7 +22,7 @@ data object Mock {
         posterPath = null,
         overview =  "Levon Cade left behind a decorated military career in the black ops to live a simple life working construction. But when his boss's daughter, who is like family to him, is taken by human traffickers, his search to bring her home uncovers a world of corruption far greater than he ever could have imagined.",
         isFavorite = true,
-        genres = genres,
+        listGenres = genres,
         releaseDate = "2024-09-12",
         tagline = "Une incroyable épopée au cœur de la nature."
     )

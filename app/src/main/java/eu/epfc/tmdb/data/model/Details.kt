@@ -3,16 +3,13 @@ package eu.epfc.tmdb.data.model
 import com.squareup.moshi.Json
 
 
-data class Genre(
-    val id: Int = 0,
-    val name: String = "",
-)
+
 
 data class Details(
     @Json(name = "backdrop_path")
     val backdropPath: String = "",
     @Json(name = "genres")
-    val genres: List<Genre> = emptyList(),
+    val listGenres: List<Genre> = emptyList(),
     @Json(name = "homepage")
     val homepage: String? = null,
     @Json(name = "id")
@@ -40,22 +37,38 @@ data class Details(
     @Json(ignore = true)
     var isFavorite: Boolean = false
 )
-fun Details.toMovie() = Movie(
-    genreIds = this.genres.map { it.id },
-    movieId = this.movieId,
-    overview = this.overview,
-    posterPath = this.posterPath,
-    title = this.title,
-    voteAverage = this.voteAverage.toDouble(),
-    voteCount = this.voteCount,
-    popularity = this.popularity.toDouble(),
-    isFavorite = this.isFavorite
-
+{
+    data class Genre(
+        val id: Int = 0,
+        val name: String = "",
     )
 
-val Details.year : String
-  get()  =  if (this.releaseDate.length > 3 ) this.releaseDate.substring(0..3)  else "?"
 
+    val year : String
+        get()  =  if (releaseDate.length > 3 ) releaseDate.substring(0..3)  else "?"
+
+    val genres: List<String>
+        get() = listGenres.map { it.name }
+
+    //data class Language(
+    //    @Json(name = "english_name")  val englishName: String = "",
+    //    @Json(name = "iso_639_1") val iso639: String = "",
+    //    @Json(name = "name") val name: String = "",
+    //)
+
+    //data class Country(
+    //    @Json(name = "iso_3166_1") val iso3166: String,
+    //    val name: String
+    //)
+
+    //data class Company(
+    //    @Json(name = "id")  val id: Int,
+    //    @Json(name = "logo_path") val logoPath: String = "",
+    //    @Json(name = "name") val name: String = "",
+    //    @Json(name = "origin_country") val originCountry: String = ""
+    //)
+
+}
 
 //    @Json(name = "adult")val adult: Boolean = false,
 //    @Json(name = "budget") val budget: Long = 0,
@@ -70,22 +83,6 @@ val Details.year : String
 //    @Json(ignore = true) var isFavorite: Boolean = false
 
 
-//data class Language(
-//    @Json(name = "english_name")  val englishName: String = "",
-//    @Json(name = "iso_639_1") val iso639: String = "",
-//    @Json(name = "name") val name: String = "",
-//)
 
-//data class Country(
-//    @Json(name = "iso_3166_1") val iso3166: String,
-//    val name: String
-//)
-
-//data class Company(
-//    @Json(name = "id")  val id: Int,
-//    @Json(name = "logo_path") val logoPath: String = "",
-//    @Json(name = "name") val name: String = "",
-//    @Json(name = "origin_country") val originCountry: String = ""
-//)
 
 

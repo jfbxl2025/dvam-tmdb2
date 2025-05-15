@@ -42,6 +42,7 @@ fun TmdbNavHost(
 
         composable<DetailsDestination> {
             DetailsScreen(
+                navigateToFavorites = { navController.navigate(FavoritesDestination)},
                 navigateBack = { navController.navigateUp() }
             )
         }

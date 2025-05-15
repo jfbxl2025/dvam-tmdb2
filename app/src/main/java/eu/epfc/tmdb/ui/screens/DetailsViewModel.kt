@@ -8,29 +8,31 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import eu.epfc.tmdb.data.MoviesRepository
 import eu.epfc.tmdb.data.model.Details
-import eu.epfc.tmdb.data.model.toMovie
-import eu.epfc.tmdb.data.repositories.DetailsRepository
-import eu.epfc.tmdb.data.services.FavoritesManager
+import eu.epfc.tmdb.data.model.Review
+//import eu.epfc.tmdb.data.model.toMovie
 import eu.epfc.tmdb.ui.DetailsDestination
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
     savedStateHandle: SavedStateHandle,
-    private val detailsRepository: DetailsRepository,
-    private val favoritesManager: FavoritesManager
+    private val moviesRepository:MoviesRepository,
 ) : ViewModel() {
 
     private val movieId = savedStateHandle.toRoute<DetailsDestination>().movieId
 
 
     var details: Details by mutableStateOf(Details())
-    var isFavorite: Boolean by mutableStateOf( favoritesManager.movies.find { it.movieId == movieId }?.let { true } ?: false)
+    var isFavorite: Boolean by mutableStateOf( false)
+    var reviews: List<Review> by mutableStateOf(emptyList())
 
     init {
         viewModelScope.launch {
             try {
-                details = detailsRepository.getDetails(movieId)
+                details = moviesRepository.getDetails(movieId)
+                isFavorite = details.isFavorite
+                reviews = moviesRepository.getReviews(movieId)
             }
             catch (e:Exception) {
                 Log.e("detail VM",e.message ?: "error")
@@ -38,9 +40,9 @@ class DetailsViewModel(
         }
     }
 
-    fun setFavorite() {
+    fun toggleFavorite() {
         viewModelScope.launch {
-            if (favoritesManager.setFavorite(details.toMovie(), isFavorite = !isFavorite)) {
+            if( moviesRepository.setFavorite(details.movieId, !isFavorite) ) {
                 isFavorite = !isFavorite
             }
         }

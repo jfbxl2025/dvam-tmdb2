@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import eu.epfc.tmdb.ui.components.MovieCard
-import eu.epfc.tmdb.ui.components.Paging
 import eu.epfc.tmdb.ui.components.TmdbScaffold
 import eu.epfc.tmdb.ui.TmdbViewModelProvider
 
@@ -36,7 +35,7 @@ fun MoviesScreen (
 ) {
 
     TmdbScaffold(
-        title = "Movie List screen",
+        title = "Movies List",
         canNavigateNext = true,
         navigationDown = navigateToFavorites
     ) {
@@ -53,9 +52,9 @@ fun MoviesScreen (
                 )
             }
             item {
-//                Paging(viewModel)
+
                 Button(
-                    onClick = { viewModel.fetchNextMovies() },
+                    onClick = { viewModel.fetchMore() },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(32.dp)

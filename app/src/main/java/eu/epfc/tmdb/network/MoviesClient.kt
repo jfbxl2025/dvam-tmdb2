@@ -5,6 +5,7 @@ import eu.epfc.tmdb.data.model.Favorite
 import eu.epfc.tmdb.data.model.Movie
 import eu.epfc.tmdb.data.model.Page
 import eu.epfc.tmdb.data.model.Result
+import eu.epfc.tmdb.data.model.Review
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -27,7 +28,7 @@ interface MoviesClient {
     ): Page<Movie>
 
     @POST("account/null/favorite")
-    suspend fun setFavorite(@Body favorite: Favorite): Result
+    suspend fun postFavorite(@Body favorite: Favorite): Result
 
     @GET("account/null/favorite/movies")
     suspend fun getFavorites(
@@ -37,6 +38,13 @@ interface MoviesClient {
     @GET("movie/{movie_id}")
     suspend fun getDetails(
         @Path("movie_id") movieId: Int,
-        @Query("language") language: String =  "fr-FR",
+//        @Query("language") language: String =  "fr-FR",
     ): Details
+
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getReviews(
+        @Path("movie_id") movieId: Int,
+//        @Query("language") language: String =  "fr-FR",
+    ):Page<Review>
+
 }

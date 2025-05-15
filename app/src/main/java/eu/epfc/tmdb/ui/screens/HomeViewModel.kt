@@ -1,8 +1,5 @@
 package eu.epfc.tmdb.ui.screens
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
