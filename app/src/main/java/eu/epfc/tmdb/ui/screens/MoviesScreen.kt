@@ -52,42 +52,36 @@ fun MoviesScreen (
                 )
             }
             item {
-
-                Button(
-                    onClick = { viewModel.fetchMore() },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(32.dp)
-                ) {
-                    Text(
-                        text= "Show more",
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 24.sp,
-                    )
-                }
+                NextButton( onClick = {viewModel.fetchMore()})
             }
         }
     }
 }
-
-
-@Preview
 @Composable
-private fun NextButton() {
+private fun NextButton(
+    onClick: () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = { },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-//            .background(color = Color.Cyan)
             .padding(32.dp)
     ) {
         Text(
             text= "Show more",
             fontWeight = FontWeight.ExtraBold,
             fontSize = 24.sp,
-            color = Color.White
+//            color = Color.White
         )
     }
+}
+
+
+@Preview
+@Composable
+private fun NextButtonPreview() {
+   NextButton()
 }
 
 

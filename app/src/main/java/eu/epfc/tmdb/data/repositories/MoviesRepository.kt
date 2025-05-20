@@ -51,10 +51,15 @@ class MoviesRepository( private val client: MoviesClient ) {
 
     private suspend fun fetchAllFavorites(): List<Movie> {
         val movies = mutableListOf<Movie>()
-        val firstPage = client.getFavorites(1)
-        firstPage.results.forEach { movies.add(it.also { it.isFavorite = true } )}
-        for (i in 2..firstPage.totalPages ) {
-            client.getFavorites(page = i).results.forEach { movies.add(it.also { it.isFavorite = true }) }
+        try {
+
+            val firstPage = client.getFavorites(1)
+            firstPage.results.forEach { movies.add(it.also { it.isFavorite = true } )}
+            for (i in 2..firstPage.totalPages ) {
+                client.getFavorites(page = i).results.forEach { movies.add(it.also { it.isFavorite = true }) }
+            }
+        } catch (e: Exception) {
+            Log.e("REPO", "can't fetch favorites. ${e.message ?: "unknown error"}")
         }
         return movies
     }

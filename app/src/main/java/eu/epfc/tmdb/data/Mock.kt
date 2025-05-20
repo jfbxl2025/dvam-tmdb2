@@ -15,6 +15,9 @@ data object Mock {
         Genre(name = "Drama"),
         Genre(name = "Action"),
         Genre(name = "Thriller"),
+        Genre(name = "Drama"),
+        Genre(name = "Action"),
+        Genre(name = "Thriller"),
     )
 
     val details = Details(

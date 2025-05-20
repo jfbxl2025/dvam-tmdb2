@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -10,6 +12,13 @@ android {
     compileSdk = 35
 
     defaultConfig {
+
+        val keystoreFile  = project.rootProject.file("keystore.properties")
+        val keystoreProperties = Properties()
+        keystoreProperties.load(keystoreFile.inputStream())
+        val tmdbApiKey= keystoreProperties["TMDB_API_KEY"] ?: ""
+        val tmdbAccessToken= keystoreProperties["TMDB_ACCESS_TOKEN"] ?: ""
+
         applicationId = "eu.epfc.tmdb"
         minSdk = 28
         targetSdk = 35
@@ -17,6 +26,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            type = "String" ,
+            name = "TMDB_ACCESS_TOKEN" ,
+            value = tmdbAccessToken as String
+        )
+
+        buildConfigField(
+            type = "String" ,
+            name = "TMDB_API_KEY" ,
+            value = tmdbApiKey as String
+        )
     }
 
     buildTypes {
@@ -37,6 +58,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

@@ -25,17 +25,15 @@ class DetailsViewModel(
 
     var details: Details by mutableStateOf(Details())
     var isFavorite: Boolean by mutableStateOf( false)
-    var reviews: List<Review> by mutableStateOf(emptyList())
 
     init {
         viewModelScope.launch {
             try {
                 details = moviesRepository.getDetails(movieId)
                 isFavorite = details.isFavorite
-                reviews = moviesRepository.getReviews(movieId)
             }
             catch (e:Exception) {
-                Log.e("detail VM",e.message ?: "error")
+                Log.e("details VM",e.message ?: "error")
             }
         }
     }

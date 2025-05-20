@@ -69,13 +69,7 @@ fun MovieCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column(
-//                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(text = "Vote average: ${movie.voteAverage}")
-                    Text(text = "Popularity : ${movie.popularity}")
-                    Text(text = "Vote count: ${movie.voteCount}")
-                }
+               ScoreBadge( score = (movie.voteAverage * 10).toInt())
                 if(showIsFavorite && movie.isFavorite)
                 Icon(
                     Icons.Filled.Favorite,

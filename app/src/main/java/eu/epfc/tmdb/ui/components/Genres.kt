@@ -22,6 +22,7 @@ fun Genres(
     FlowRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         genres.forEach { genre ->
             Surface(

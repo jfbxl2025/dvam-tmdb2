@@ -38,6 +38,7 @@ import eu.epfc.tmdb.data.model.Review
 import eu.epfc.tmdb.ui.TmdbViewModelProvider
 import eu.epfc.tmdb.ui.components.Genres
 import eu.epfc.tmdb.ui.components.Poster
+import eu.epfc.tmdb.ui.components.ScoreBadge
 import eu.epfc.tmdb.ui.components.TmdbScaffold
 
 @Composable
@@ -119,19 +120,7 @@ fun DetailsContent(
                 verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxHeight()
             ) {
-                Row(
-                    verticalAlignment = Alignment.Top
-                ) {
-                    Text(
-                        text = (details.voteAverage * 10).toInt().toString(),
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 24.sp,
-                    )
-                    Text(
-                        text="%",
-                        fontSize = 8.sp
-                    )
-                }
+               ScoreBadge( score = (details.voteAverage * 10).toInt() )
                 Genres( genres = details.genres)
             }
         }
@@ -176,32 +165,6 @@ fun DetailsContent(
 }
 
 
-@Composable
-fun ReviewsContent(reviews: List<Review>) {
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp))
-    {
-        items(reviews) { review ->
-            Card(
-                shape = MaterialTheme.shapes.medium,
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-            ) {
-                Column (
-                    modifier = Modifier.padding(all = 16.dp)
-                ) {
-                    Text(
-                        text = review.author,
-                        modifier = Modifier.padding(bottom = 16.dp),
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    Text(
-                        text = review.content,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                }
-            }
-        }
-    }
-}
 @Preview
 @Composable
 private fun DetailsScreenPreview() {

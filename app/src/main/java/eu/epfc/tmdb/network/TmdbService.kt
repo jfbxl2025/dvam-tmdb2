@@ -4,6 +4,7 @@ import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import eu.epfc.tmdb.Constants
+import eu.epfc.tmdb.BuildConfig
 import eu.epfc.tmdb.network.interceptors.MainInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +14,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object TmdbService {
 
-    private const val API_KEY = Constants.TMDB_API_KEY
+//    private const val API_KEY = Constants.TMDB_API_KEY
+    private const val API_KEY = BuildConfig.TMDB_API_KEY
+//    private const val ACCESS_TOKEN = BuildConfig.TMDB_ACCESS_TOKEN
     private const val BASE_URL = Constants.TMDB_BASE_URL
 
     val moviesClient: MoviesClient
